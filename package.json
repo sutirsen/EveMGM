@@ -1,0 +1,32 @@
+{
+  "name": "event_mgmt",
+  "version": "1.0.0",
+  "description": "Event Management for VMT",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Sutirtho Sen <sutirtho.sen@amd.com>",
+  "license": "MIT",
+  "dependencies": {
+    "angular-cookies": "^1.6.2",
+    "angular-resource": "^1.6.2",
+    "angular-sanitize": "^1.6.2",
+    "angular-ui-router": "^0.4.2",
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.16.0",
+    "bootstrap": "^3.3.7",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.1",
+    "jsonwebtoken": "^7.2.1",
+    "mongoose": "^4.8.1",
+    "mongoose-bcrypt": "^1.4.2",
+    "morgan": "^1.8.0",
+    "resource-router-middleware": "^0.6.0",
+    "serve-favicon": "^2.3.2",
+    "validator": "^6.2.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0"
+  }
+}

@@ -1,0 +1,104 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h5>
+      Events
+      <span class="btn btn-sm btn-primary fui-plus"
+        data-toggle="collapse" 
+        href="#eventInserter" 
+        aria-expanded="false" 
+        aria-controls="eventInserter"></span>
+    </h5>
+    <div class="collapse" id="eventInserter">
+      <form class="form-horizontal" ng-submit="insert()">
+        <div class="form-group">
+          <label for="name" class="col-sm-2 control-label">Name</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="event.name" class="form-control" id="name" placeholder="Event Name" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="type" class="col-sm-2 control-label">Type</label>
+          <div class="col-sm-10">
+            <select ng-options="type as type for type in event_types" class="form-control" id="type" ng-model="event.type"
+             required>
+              <option value="">Type</option>
+            </select>
+          </div>
+        </div>        
+        <div class="form-group">
+          <label for="date_of_event" class="col-sm-2 control-label">Date of Event</label>
+          <div class="col-sm-10">
+            <datepicker date-format="yyyy-MM-dd" selector="form-control">
+                <div class="input-group">
+                    <input ng-model="event.date_of_event" class="form-control" placeholder="Choose a date"/>
+                    <span class="input-group-addon" style="cursor: pointer">
+                      <span class="fui-triangle-down-small"></span>
+                    </span>
+                </div>
+            </datepicker>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="date_of_event" class="col-sm-2 control-label">Excluded Employees</label>
+          <div class="col-sm-10">
+            <ui-select multiple ng-model="event.excluded_employees" theme="bootstrap" close-on-select="false" title="Choose an employee">
+                <ui-select-match placeholder="Select employee...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
+                <ui-select-choices repeat="employee._id as employee in employees | propsFilter: {name: $select.search, unix_id: $select.search}">
+                  <div ng-bind-html="employee.name | highlight: $select.search"></div>
+                  <small>
+                    email: {{employee.email}}
+                    unix_id: <span ng-bind-html="''+employee.unix_id | highlight: $select.search"></span>
+                  </small>
+                </ui-select-choices>
+              </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="collectible_amount" class="col-sm-2 control-label">Collectible Amount</label>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon">&#x20b9;</span>
+              <input type="number" min="1" step="any" class="form-control" id="collectible_amount" ng-model="event.collectible_amount" placeholder="Amount" required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button ng-click="closeInsert()" class="btn btn-inverse">Close</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <table class="table table-striped" datatable="ng" dt-options="dataTableOptions">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Total Expense</th>
+          <th>Total Collection</th>
+          <th>Excluded</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="event in events">
+          <td>{{event.name}}</td>          
+          <td>{{event.type}}</td>          
+          <td>{{event.date_of_event | date: 'yyyy-MM-dd'}}</td>          
+          <td>{{event.collectible_amount | currency: '&#x20b9 '}}</td>          
+          <td>{{event.total_expense | currency: '&#x20b9 '}}</td>          
+          <td>{{event.total_collection | currency: '&#x20b9 '}}</td>
+          <td><button class="btn btn-sm btn-info" ng-click="showExcludedEmployees(event.excluded_employees)">See</button></td>
+          <td>
+            <button class="btn btn-sm btn-info" ng-click="showCollectionModal(event._id ,event.excluded_employees)">Collect</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

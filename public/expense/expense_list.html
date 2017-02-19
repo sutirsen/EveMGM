@@ -1,0 +1,111 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h5>
+      Expenses
+      <span class="btn btn-sm btn-primary fui-plus"
+        data-toggle="collapse" 
+        href="#expInserter" 
+        aria-expanded="false" 
+        aria-controls="expInserter"></span>
+    </h5>
+    <div class="collapse" id="expInserter">
+      <form class="form-horizontal" ng-submit="insert()">
+        <div class="form-group">
+          <label for="name" class="col-sm-2 control-label">Name</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="expense.name" class="form-control" id="name" placeholder="Expense Name" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="amount" class="col-sm-2 control-label">Amount</label>
+          <div class="col-sm-10">
+            <input type="number" min="1" step="any" class="form-control" id="amount" ng-model="expense.amount" placeholder="Amount Spent" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expense_date" class="col-sm-2 control-label">Expense Date</label>
+          <div class="col-sm-10">
+            <datepicker date-format="yyyy-MM-dd" selector="form-control">
+                <div class="input-group">
+                    <input ng-model="expense.expense_date" id="expense_date" class="form-control" placeholder="Expense Date"/>
+                    <span class="input-group-addon" style="cursor: pointer">
+                      <span class="fui-triangle-down-small"></span>
+                    </span>
+                </div>
+            </datepicker>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expense_made_by" class="col-sm-2 control-label">Expend made by</label>
+          <div class="col-sm-10">
+            <ui-select ng-model="expense.expense_made_by" theme="bootstrap" title="Choose an employee">
+                <ui-select-match placeholder="Select employee...">{{$select.selected.name}} &lt;{{$select.selected.email}}&gt;</ui-select-match>
+                <ui-select-choices repeat="employee._id as employee in employees | propsFilter: {name: $select.search, unix_id: $select.search}">
+                  <div ng-bind-html="employee.name | highlight: $select.search"></div>
+                  <small>
+                    email: {{employee.email}}
+                    unix_id: <span ng-bind-html="''+employee.unix_id | highlight: $select.search"></span>
+                  </small>
+                </ui-select-choices>
+              </ui-select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="event" class="col-sm-2 control-label">Event</label>
+          <div class="col-sm-10">
+            <ui-select ng-model="expense.event_id" theme="bootstrap" title="Choose an event">
+                <ui-select-match placeholder="Search by date or event name">
+                  {{$select.selected.name}} - {{$select.selected.date_of_event}}
+                </ui-select-match>
+                <ui-select-choices repeat="event._id as event in events | propsFilter: {name: $select.search, date_of_event: $select.search}">
+                  <div ng-bind-html="event.name | highlight: $select.search"></div>
+                  <small>
+                    type: {{event.type}}
+                    date: <span ng-bind-html="''+event.date_of_event | highlight: $select.search"></span>
+                  </small>
+                </ui-select-choices>
+              </ui-select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="misc_details" class="col-sm-2 control-label">Other details</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="misc_details" ng-model="expense.misc_details" placeholder="Misc details"/>
+          </div>
+        </div>
+        
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button ng-click="closeInsert()" class="btn btn-inverse">Close</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <table class="table table-striped" datatable="ng" dt-options="dataTableOptions">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Amount</th>
+          <th>Expense Date</th>
+          <th>Event</th>
+          <th>Employee</th>
+          <th>Other</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="expense in expenses">
+          <td>{{expense.name}}</td>          
+          <td>{{expense.amount | currency: '&#x20b9 '}}</td>          
+          <td>{{expense.expense_date | date: 'yyyy-MM-dd'}}</td>          
+          <td>{{expense.EventName}}</td>          
+          <td>{{expense.EmpName}}</td>
+          <td>{{expense.misc_details}}</td>
+          <td><button class="btn btn-sm btn-danger" ng-click="delete(expense._id)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

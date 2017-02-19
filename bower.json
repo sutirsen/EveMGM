@@ -1,0 +1,28 @@
+{
+  "name": "event_mgmt",
+  "description": "Event Management for VMT",
+  "main": "server.js",
+  "authors": [
+    "Sutirtho Sen <sutirtho.sen@amd.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "flat-ui": "^2.3.0",
+    "angular-growl-v2": "^0.7.9",
+    "angular-datatables": "0.6.0",
+    "datatables.net": "^2.1.1",
+    "datatables.net-bs": "^2.1.1",
+    "angular-ui-select": "^0.19.6",
+    "angularjs-datepicker": "^2.1.12",
+    "angular-modal-service": "^0.10.1",
+    "angular-animate": "^1.6.2"
+  }
+}

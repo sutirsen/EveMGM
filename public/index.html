@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>EveMGM</title>
+    <meta name="description" content="Flat UI Kit Free is a Twitter Bootstrap Framework design and Theme, this responsive framework includes a PSD and HTML version."/>
+
+    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="/bvendors/flat-ui/dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="/bvendors/flat-ui/dist/css/flat-ui.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="/bvendors/angular-growl-v2/build/angular-growl.min.css" rel="stylesheet">
+    <link href="/bvendors/angular-datatables/dist/css/angular-datatables.min.css" rel="stylesheet">
+    <link href="/bvendors/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css" rel="stylesheet">
+    <link href="/bvendors/angular-ui-select/dist/select.css" rel="stylesheet">
+    <link href="/bvendors/angularjs-datepicker/dist/angular-datepicker.min.css" rel="stylesheet">
+    <link href="/app.css" rel="stylesheet">
+
+    <!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="dist/js/vendor/html5shiv.js"></script>
+      <script src="dist/js/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body ng-app="eveMGM">
+    <div class="container">
+      <div class="demo-headline">
+        <h1 class="demo-logo">
+          <div class="logo"></div>
+          EveMGM
+          <small>Small Event Manager</small>
+        </h1>
+      </div> <!-- /demo-headline -->
+      <!-- <div ng-controller="MainCtrl" > -->
+        <div class="row demo-row" ng-show="loggedIn">
+          <div class="col-xs-12">
+            <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                  <span class="sr-only">Toggle navigation</span>
+                </button>
+              </div>
+              <div class="collapse navbar-collapse" id="navbar-collapse-01">
+                <ul class="nav navbar-nav navbar-left">
+                  <li ng-class="{ active: $state.includes('home') }"><a ui-sref="home">Home</a></li>
+                  <li ng-class="{ active: $state.includes('employee') }"><a ui-sref="employee">Employees</a></li>
+                  <li ng-class="{ active: $state.includes('event') }"><a ui-sref="event">Events</a></li>
+                  <li ng-class="{ active: $state.includes('expense') }"><a ui-sref="expense">Expenses</a></li>
+                </ul>
+                <button type="submit" ng-click="logout()" class="btn btn-sm btn-danger navbar-right" style="margin-top:9px;">
+                  <span class="fui-exit"></span> Logout
+                </button>
+                <strong class="navbar-right" style="color: white; margin-top:12px; margin-right:12px;">{{loggedInUser.name}}</strong>
+              </div><!-- /.navbar-collapse -->
+            </nav><!-- /navbar -->
+          </div>
+        </div> <!-- /row -->
+      <!-- </div> -->
+      <ui-view></ui-view>
+      <div growl></div>
+    </div> <!-- /container -->
+
+    <script src="/bvendors/flat-ui/dist/js/vendor/jquery.min.js"></script>
+    <script src="/bvendors/flat-ui/dist/js/vendor/video.js"></script>
+    <script src="/bvendors/flat-ui/dist/js/flat-ui.min.js"></script>
+    <script src="/vendors/angular/angular.min.js"></script>
+    <script src="/vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/bvendors/angular-growl-v2/build/angular-growl.min.js"></script>
+    <script src="/vendors/angular-resource/angular-resource.min.js"></script>
+    <script src="/vendors/angular-cookies/angular-cookies.min.js"></script>
+    <script src="/bvendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/bvendors/angular-datatables/dist/angular-datatables.min.js"></script>
+    <script src="/bvendors/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js"></script>
+    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/vendors/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="/bvendors/angular-ui-select/dist/select.js"></script>
+    <script src="/bvendors/angularjs-datepicker/dist/angular-datepicker.min.js"></script>
+    <script src="/bvendors/angular-animate/angular-animate.min.js"></script>
+    <script src="/bvendors/angular-modal-service/dst/angular-modal-service.min.js"></script>
+    <script src="app.js"></script>
+    <script src="employee/employee.js"></script>
+    <script src="event/event.js"></script>
+    <script src="expense/expense.js"></script>
+    <script src="user/user.js"></script>
+    <script src="services.js"></script>
+  </body>
+</html>

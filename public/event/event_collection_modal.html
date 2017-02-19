@@ -1,0 +1,97 @@
+<div class="modal fade">
+  <div class="modal-dialog" style="width: 75%">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Contribution</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" ng-submit="insert()">
+          <div class="form-group">
+            <label for="contributor" class="col-sm-2 control-label">Contributor</label>
+            <div class="col-sm-10">
+              <ui-select ng-model="collection.contributor" theme="bootstrap" title="Choose an employee">
+                  <ui-select-match placeholder="Select employee...">{{$select.selected.name}} &lt;{{$select.selected.email}}&gt;</ui-select-match>
+                  <ui-select-choices repeat="employee._id as employee in eligibleEmps | propsFilter: {name: $select.search, unix_id: $select.search}">
+                    <div ng-bind-html="employee.name | highlight: $select.search"></div>
+                    <small>
+                      email: {{employee.email}}
+                      unix_id: <span ng-bind-html="''+employee.unix_id | highlight: $select.search"></span>
+                    </small>
+                  </ui-select-choices>
+                </ui-select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="amount" class="col-sm-2 control-label">Amount</label>
+            <div class="col-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon">&#x20b9;</span>
+                <input type="number" min="1" step="any" class="form-control" id="amount" ng-model="collection.amount" placeholder="Amount" required/>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="type" class="col-sm-2 control-label">Mode of Payment</label>
+            <div class="col-sm-10">
+              <select ng-options="type as type for type in collection_types" class="form-control" id="type" ng-model="collection.mode_of_payment"
+               required>
+                <option value="">Select Mode</option>
+              </select>
+            </div>
+          </div>        
+          <div class="form-group">
+            <label for="date_of_collection" class="col-sm-2 control-label">Collection Date</label>
+            <div class="col-sm-10">
+              <datepicker date-format="yyyy-MM-dd" selector="form-control">
+                  <div class="input-group">
+                      <input ng-model="collection.contribution_date" class="form-control" placeholder="Choose a date"/>
+                      <span class="input-group-addon" style="cursor: pointer">
+                        <span class="fui-triangle-down-small"></span>
+                      </span>
+                  </div>
+              </datepicker>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="details" class="col-sm-2 control-label">Other Details</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="details" ng-model="collection.misc_details" placeholder="Misc Details (optional)"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </form>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Unix ID</th>
+              <th>Payment Mode</th>
+              <th>Amount</th>
+              <th>Date of Contribution</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="contrib in contributors">
+              <td>{{contrib.contributor_name}}</td>
+              <td>{{contrib.contributor_unix_id}}</td>
+              <td>{{contrib.mode_of_payment}}</td>
+              <td>{{contrib.amount | currency: '&#x20b9 '}}</td>
+              <td>{{contrib.contribution_date | date: 'yyyy-MM-dd'}}</td>
+              <td><button class="btn btn-sm btn-danger" ng-click="delete(contrib._id)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="close()" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

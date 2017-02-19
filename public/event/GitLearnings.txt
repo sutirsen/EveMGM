@@ -1,0 +1,67 @@
+Initialize the project dirctory to git using:
+  git init
+
+To add a single file 
+  git add filename
+To add all files 
+  git add .
+
+To check status 
+  git status
+    -> This should show untracked files, and newly added files if git add is applied on any of the new files (Staging environment)
+
+To commit 
+  git commit -m "Message for committing"
+
+  first time -->
+    git config --global user.email "<email>"
+    git config --global user.name "<name>"
+
+After commit "git log" will show the git commit history 
+After changing some file the git status will show the files that are modified but not prepared for staging
+To revert changes done to a file
+  git checkout <filename>
+
+If a file is modified after staged (git add) one can reset the staging using 
+git reset HEAD <filename>
+then do git add again
+
+Deleting 
+  git rm <filename>
+    --> This will delete the file from disk as well as add this action to staging
+  If the file is deleted from OS then we need to do git add <filename> to add the action to staging
+  If the file deletion is already added to staging and we want to undo then we can do 
+  git reset HEAD <filename>
+  git checkout <filename>
+
+  If we have modified a whole lot of files then all actions can be performed using
+    git add --all
+
+Checking out
+  If we do git log then we will see all our commits and an associating hash with each commits
+  To checkout a specific commit we can do 
+    git checkout <commit hash or part of it>
+      --> this is kind of a sandbox where we can do every thing like usual and commit 
+  If we do
+    git branch 
+      --> we will see all branches (the sandbox will be also shown as an unsaved branch)
+  If we want to go back to previous 
+    git checkout master
+
+  If we want to create a branch from the current workarea
+    git checkout -b <branchname>
+
+  If we want to save out sandbox commit in a new branch
+    git branch <branchname> <commithash>
+
+  To jump between branches 
+    git checkout <branchname>
+
+Merging branches 
+  To merge two branches 
+    git merge <branchname>
+      --> it will merge the specified branch with the current branch
+
+
+
+
