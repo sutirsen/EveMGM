@@ -1,4 +1,3 @@
-//var debug = require('debug')('SimAnalyticsTemp');
 var app = require('./app');
 
 app.set('port', process.env.PORT || 3030);

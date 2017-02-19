@@ -13,6 +13,8 @@ npm install
 bower install
 npm start
 ```
+Server by default runs at port **3030**, set PORT environment variable before starting to run at desired port.
+
 Currently the tests are written only for the api, to run the tests (good way to learn the app specs as well)
 ```
 npm test
