@@ -8,9 +8,6 @@ var EventExpense    = require('../models/event_expense');
 var EventCollection = require('../models/event_collection');
 var resource        = require('../models/resource');
 
-// Controllers
-var EmployeesCtrl = require('../controllers/EmployeesCtrl');
-
 var router = express.Router();
 
 
@@ -19,17 +16,21 @@ router.get('/', function(req, res) {
 });
 
 router.get('/setup', function(req, res) {
-  User.create({
-    name: 'Sutirtho',
-    email: 'sutirtho.sen@amd.com',
-    password: '123456'
-  }, function(err, usr) {
-    if(err) res.status(400).json({ success: false, message: 'Not created!' });
+  if(req.query.admin && req.query.admin == 'superSecret') {
+    User.create({
+      name: req.query.name,
+      email: req.query.email,
+      password: req.query.password
+    }, function(err, usr) {
+      if(err) res.status(400).json({ success: false, message: 'Not created!' });
 
-    if(usr) {
-      res.status(200).json({ success: true, message: 'User created!' });      
-    }
-  });
+      if(usr) {
+        res.status(200).json({ success: true, message: 'User created!' });      
+      }
+    });
+  } else {
+    res.status(200).json({ success: false, message: 'You don\'t have the secret' }); 
+  }  
 });
 
 router.post('/authenticate', function(req, res) {

@@ -4,7 +4,8 @@
   "description": "Event Management for VMT",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node server.js"
   },
   "author": "Sutirtho Sen <sutirtho.sen@amd.com>",
   "license": "MIT",
