@@ -35,7 +35,7 @@ module.exports = function(name, model) {
 
     list({ params }, res) {
       
-      var limit = Math.max(1, Math.min(50, params.limit|0 || 10));
+      var limit = Math.max(1, Math.min(50, params.limit|0 || 10000));
 
       // if you have fulltext search enabled.
       if (params.search && typeof model.textSearch==='function') {
